@@ -50,7 +50,9 @@ int main()
         case 2:
             MostrarInformacion(codigos_main);
             break;
-
+        case 3:
+            std::cout << "Saliendo..." << std::endl;
+            break;
         default:
             std::cout << "Opcion incorrecta. Intente de nuevo" << std::endl;
             break;
@@ -70,14 +72,15 @@ std::string SolicitarPrefijo()
         std::cout << "Ingrese dos letras: ";
         std::cin >> prefijo;
 
-        if (prefijo.length() != 2)
+        if (prefijo.length() == 2)
+        {
+            return prefijo;
+        }
+        else
         {
             std::cout << "Error. Intente de nuevo" << std::endl;
         }
-
     } while (prefijo.length() != 2);
-
-    return prefijo;
 };
 
 std::string GenerarCodigo(std::string prefijo)
@@ -111,13 +114,17 @@ int PorcentajeDescuento(std::string numero_aleatorio)
 struct Codigos SolicitarDatosGenerales()
 {
     struct Codigos informacion;
+    std::string codigo;
+    int porcentaje;
     std::cout << "Ingrese su nombre: ";
     std::cin >> informacion.informacion_cliente.nombre_cliente;
     std::cout << "Ingrese la cantidad de codigos que desea generar: ";
     std::cin >> informacion.cantidad_codigos;
     for (auto i = 0; i < informacion.cantidad_codigos; i++)
     {
-        informacion.informacion_codigo.push_back({GenerarCodigo(SolicitarPrefijo()), PorcentajeDescuento(GenerarCodigo(SolicitarPrefijo()))});
+        codigo = GenerarCodigo(SolicitarPrefijo());
+        porcentaje = PorcentajeDescuento(codigo);
+        informacion.informacion_codigo.push_back({codigo, porcentaje});
     }
 
     return informacion;
