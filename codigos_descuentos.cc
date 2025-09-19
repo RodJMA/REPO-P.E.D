@@ -28,6 +28,7 @@ struct Codigos
 
 std::string SolicitarPrefijo();
 std::string GenerarCodigo(std::string prefijo);
+int PorcentajeDescuento(std::string numero_aleatorio);
 
 int main()
 {
@@ -38,7 +39,6 @@ int main()
 
 std::string SolicitarPrefijo()
 {
-
     std::string prefijo;
 
     do
@@ -59,9 +59,27 @@ std::string SolicitarPrefijo()
 std::string GenerarCodigo(std::string prefijo)
 {
     std::string codigo;
-    int numero_aleatorio = rand() % (30 + 5 + 1) + 5;
+    int numero_aleatorio = rand() % (999 - 100 + 1) + 100; // 100 al 999
 
     codigo = "--" + prefijo + std::to_string(numero_aleatorio) + "--";
 
     return codigo;
+};
+
+int PorcentajeDescuento(std::string numero_aleatorio)
+{
+    int porcentaje_de_descuento;
+    std::string parte_extraida = numero_aleatorio.substr(5, 3);
+    int parte_numerica = std::stoi(parte_extraida);
+
+    if ((parte_numerica % 2) == 0)
+    {
+        porcentaje_de_descuento = rand() % (30 + 5 + 1) + 5;
+    }
+    else
+    {
+        porcentaje_de_descuento = 0;
+    }
+
+    return porcentaje_de_descuento;
 };
