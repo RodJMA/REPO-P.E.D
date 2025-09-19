@@ -20,11 +20,36 @@ struct Codigos
 {
     int cantidad_codigos;
     struct Cliente informacion_cliente;
-    std::vector<std::pair<std::string, int>> informacion_codigos; // (cupo, porcentaje de descuento)
+    std::vector<std::pair<std::string, int>> informacion_codigo; // (codigo, porcentaje de descuento)
 };
+
+std::string SolicitarPrefijo();
+std::string GenerarCodigo(std::string prefijo);
 
 int main()
 {
 
     return 0;
 }
+
+std::string SolicitarPrefijo()
+{
+
+    std::string prefijo;
+
+    do
+    {
+        std::cout << "Ingrese dos letras: ";
+        std::cin >> prefijo;
+
+        if (prefijo.length() != 2)
+        {
+            std::cout << "Error. Intente de nuevo" << std::endl;
+        }
+
+    } while (prefijo.length() != 2);
+
+    return prefijo;
+};
+
+std::string GenerarCodigo(std::string prefijo);
