@@ -29,6 +29,7 @@ struct Codigos
 std::string SolicitarPrefijo();
 std::string GenerarCodigo(std::string prefijo);
 int PorcentajeDescuento(std::string numero_aleatorio);
+struct Codigos SolicitarDatosGenerales();
 
 int main()
 {
@@ -82,4 +83,19 @@ int PorcentajeDescuento(std::string numero_aleatorio)
     }
 
     return porcentaje_de_descuento;
+};
+
+struct Codigos SolicitarDatosGenerales()
+{
+    struct Codigos informacion;
+    std::cout << "Ingrese su nombre: ";
+    std::cin >> informacion.informacion_cliente.nombre_cliente;
+    std::cout << "Ingrese la cantidad de codigos que desea generar: ";
+    std::cin >> informacion.cantidad_codigos;
+    for (auto i = 0; i < informacion.cantidad_codigos; i++)
+    {
+        informacion.informacion_codigo.push_back({GenerarCodigo(SolicitarPrefijo()), PorcentajeDescuento(GenerarCodigo(SolicitarPrefijo()))});
+    }
+
+    return informacion;
 };
