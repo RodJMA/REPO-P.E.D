@@ -1,5 +1,8 @@
 #include <iostream>
+#include <string>
 #include <vector>
+#include <ctime>
+#include <cstdlib>
 /*
 El programa debe:
 
@@ -28,6 +31,7 @@ std::string GenerarCodigo(std::string prefijo);
 
 int main()
 {
+    srand(time(0));
 
     return 0;
 }
@@ -52,4 +56,12 @@ std::string SolicitarPrefijo()
     return prefijo;
 };
 
-std::string GenerarCodigo(std::string prefijo);
+std::string GenerarCodigo(std::string prefijo)
+{
+    std::string codigo;
+    int numero_aleatorio = rand() % (30 + 5 + 1) + 5;
+
+    codigo = "--" + prefijo + std::to_string(numero_aleatorio) + "--";
+
+    return codigo;
+};
