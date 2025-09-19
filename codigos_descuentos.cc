@@ -30,10 +30,33 @@ std::string SolicitarPrefijo();
 std::string GenerarCodigo(std::string prefijo);
 int PorcentajeDescuento(std::string numero_aleatorio);
 struct Codigos SolicitarDatosGenerales();
+void MostrarInformacion(std::vector<struct Codigos> codigos);
 
 int main()
 {
     srand(time(0));
+    std::vector<struct Codigos> codigos_main;
+    int opcion;
+    do
+    {
+
+        std::cout << "1. Generar codigos \n2. Mostrar informacion \n3. Salir \nIngrese la opcion: ";
+        std::cin >> opcion;
+        switch (opcion)
+        {
+        case 1:
+            codigos_main.push_back(SolicitarDatosGenerales());
+            break;
+        case 2:
+            MostrarInformacion(codigos_main);
+            break;
+
+        default:
+            std::cout << "Opcion incorrecta. Intente de nuevo" << std::endl;
+            break;
+        }
+
+    } while (opcion != 3);
 
     return 0;
 }
@@ -98,4 +121,19 @@ struct Codigos SolicitarDatosGenerales()
     }
 
     return informacion;
+};
+
+void MostrarInformacion(std::vector<struct Codigos> codigos)
+{
+
+    for (auto c : codigos)
+    {
+        std::cout << "Nombre del cliente: " << c.informacion_cliente.nombre_cliente << std::endl;
+        std::cout << "Cantidad de codigos del cliente: " << c.cantidad_codigos << std::endl;
+        std::cout << "-----------------------------------------------------------------------" << std::endl;
+        for (auto c_i : c.informacion_codigo)
+        {
+            std::cout << c_i.first << " || Porcentaje de descuento: " << c_i.second << std::endl;
+        }
+    }
 };
